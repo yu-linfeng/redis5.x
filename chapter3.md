@@ -29,6 +29,13 @@ OK
 (integer) 1
 ```
 
+字符串数据类型还有一个```mset```表示同时写入一个或多个字符串值，```mset [key1] [value1] [key2] [value2]```。
+
+```
+127.0.0.1:6379> mset key1 value1 key2 value2
+OK
+```
+
 ### 自增/自减命令
 
 自增+1命令通过```incr```关键字实现，```incr [key]```。
