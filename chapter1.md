@@ -4,8 +4,6 @@
 
 Redis5.0.7下载地址：[https://redis.io/download](https://redis.io/download)
 
-
-
 ### mac OS
 
 在下载完redis-5.0.7.tar.gz后，我们通过命令```tar -zxvf redis-5.0.7.tar.gz```，解压后将redis安装包拷贝到```/usr/local```目录下，命令```sudo mv redis-5.0.7 /usr/local```。

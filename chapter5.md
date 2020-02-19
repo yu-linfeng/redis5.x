@@ -1,6 +1,6 @@
 # Java客户端（上）
 
-> 有关本章的源码：[源码](http://#)
+> 有关本章的源码：[https://github.com/yu-linfeng/redis5.x_tutorial/tree/master/code/jedis](https://github.com/yu-linfeng/redis5.x_tutorial/tree/master/code/jedis)
 
 前面的章节介绍了redis的安装、还有命令配置等内容，我们在实际使用时大部分情况都是利用现成的Java客户端对redis进行操作。当然命令并不是没用，它极有可能在你排查问题时排上用场，因为你有可能会直接连入redis服务端通过命令行来排查是否是redis缓存的问题。
 

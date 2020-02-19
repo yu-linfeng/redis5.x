@@ -448,6 +448,126 @@ OK
 
 ### 多个集合命令
 
+redis可以对多个集合进行操作，例如数学中的差集运算、交集运算等。下面只列举多个集合操作的命令，不再举例，但如果有场景运用时一定要知道redis还可以做多集合运算。
+
+```sdiff [key1] [key2]……```命令返回存在于key1，但不存在于其他集合（key2）中的元素（差集运算）。
+
+```sdiff [dest-key] [key1] [key2]……```命令也是同上的差集运算，但它将元素存储到dest-key键中。
+
+```sinter [key1] [key2]……```命令返回同时存在所有集合（key1、key2）中的元素（交集运算）。
+
+```sinterstore [dest-key] [key1] [key2]……```命令也是同上的交集运算，但它将元素存储到dest-key键中。
+
+```sunion [key1] [key2]……```命令返回所有集合中（key1、key2）的元素（并集运算）。
+
+```sunionstore [dest-key] [key1] [key2]……```命令也是同上的并集运算，但它将元素存储到dest-key键中。
+
+
+
+## 有序集合
+
+在上一章**数据类型**中，我们谈到尽管“有序集合”这种数据类型，更像是“集合”的有序版，但对于数据结构上讲，它更类似“哈希（hash）”。它同哈希类型一样，值也是k-v形式，不同的是有序集合的v代表的是用于排序的“分数”。
+
+### 读/写等常用命令
+
+```zadd```用于有序集合的写入操作，```zadd [key] [score1] [member1] [score2] [member2]…… ```。
+
+```
+127.0.0.1:6379> zadd sorted 2 a 3 b
+(integer) 2
+```
+
+```zcard```命令用于返回有序集合中的成员数量，```zcard [key]```。
+
+```
+127.0.0.1:6379> zcard sorted
+(integer) 2
+```
+
+```zrank```用于返回有序集合中成员member的排名（按分数从小到大排列），```zrank [key] [member]```。
+
+```
+127.0.0.1:6379> zrank sorted a
+(integer) 0
+127.0.0.1:6379> zrank sorted b
+(integer) 1
+```
+
+```zrevrank```命令也是返回成员member的排名，但它和```zrank```排序规则相反，它是按分数从大到小排列，```zrevrank [key] [member]```。
+
+```
+127.0.0.1:6379> zrevrank sorted a
+(integer) 1
+127.0.0.1:6379> zrevrank sorted b
+(integer) 0
+```
+
+```zscore```命令返回成员member的分数，```zscore [key] [member]```。
+
+```
+127.0.0.1:6379> zscore sorted a
+"2"
+```
+
+```zrange [key] [start] [stop] (withscores)```命令用于返回有序集合中排名介于start和stop之间的成员（按分数从小到大排列），withscores参数可选表示是否返回分数，start和end指的是排在第几名，从0开始。
+
+```
+127.0.0.1:6379> zrange sorted 0 0 withscores
+1) "a"
+2) "2"
+127.0.0.1:6379> zrange sorted 0 1 withscores
+1) "a"
+2) "2"
+3) "b"
+4) "3"
+```
+
+```zrevrange```同```zrange```类似，但它是按分数从大到小排列，```zrevrange [key] [start] [end] (withscores)```。
+
+```
+127.0.0.1:6379> zrevrange sorted 0 0 withscores
+1) "b"
+2) "3"
+127.0.0.1:6379> zrevrange sorted 0 1 withscores
+1) "b"
+2) "3"
+3) "a"
+4) "2"
+```
+
+```zcount [key] [min_score] [max_score]```返回分数介于min_score和max_score之间的成员数量。
+
+```
+127.0.0.1:6379> zcount sorted 0 2
+(integer) 1
+127.0.0.1:6379> zcount sorted 0 3
+(integer) 2
+```
+
+```zincrby [key] [incrment] [member] ```命令用于给member成员的分数加上incrment。
+
+```
+127.0.0.1:6379> zincrby sorted 2 a
+"4"
+```
+
+```zrem```命令用于删除有序集合中指定的成员，```zrem [key] [member1] [member2]……```。
+
+```
+127.0.0.1:6379> zrem sorted a
+(integer) 1
+```
+
+### 多个有序集合命令
+
+同集合一样，有序集合也可以做多个集合的操作，例如交集、并集等。
+
+```zinterstore```用于交集运算。
+
+```zunionstore```用于并集运算。
+
+
+
 
 
 

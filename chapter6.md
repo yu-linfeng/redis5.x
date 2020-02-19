@@ -214,6 +214,8 @@ okevindeMacBook-Air:redis-5.0.7 okevin$ redis-cli --eval ~/Desktop/lua_test.lua 
 
 ## Jedis中如何载入Lua脚本
 
+> 有关本节的源码：[https://github.com/yu-linfeng/redis5.x_tutorial/tree/master/code/jedis](https://github.com/yu-linfeng/redis5.x_tutorial/tree/master/code/jedis)
+
 在Jedis可以直接调用```Jedis```类的```eval```方法，第一个参数是Lua脚本，第二个参数是key值，第三个参数是value值。
 
 ```java
