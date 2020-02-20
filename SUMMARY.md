@@ -1,5 +1,6 @@
 # 目录
 
+* [写在前面的话](README.md)
 * [准备工作](chapter1.md)
 * [数据类型](chapter2.md)
 * [命令](chapter3.md)
@@ -7,4 +8,5 @@
 * [Java客户端（上）](chapter5.md)
 * [事务](chapter6.md)
 * [分布式锁](chapter7.md)
-* Java客户端（下）(chapter8.md)
+* [Java客户端（下）](chapter8.md)
+
